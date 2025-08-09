@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CET 场景化练习 · MVP</title>
+    <!-- Minimal modern CSS framework via CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@2/css/pico.min.css">
+    <style>
+      header.container { margin-top: 1rem; }
+      .card { padding: 1rem; border: 1px solid #eee; border-radius: 12px; }
+      .stack { display: grid; gap: 1rem; }
+      textarea { min-height: 160px; }
+      audio { width: 100%; }
+      nav ul { align-items: center; }
+      footer { margin: 2rem 0; text-align: center; opacity: 0.7;}
+      .badge { padding: 0.2rem 0.5rem; border-radius: 999px; border: 1px solid #ccc; font-size: 0.8rem; }
+    </style>
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <ul>
+          <li><strong>CET 场景化练习 · MVP</strong></li>
+        </ul>
+        <ul>
+          <li><a href="/">主页</a></li>
+          <li><a href="/daily" data-router>每日任务</a></li>
+          <li><a href="/listening" data-router>听力</a></li>
+          <li><a href="/speaking" data-router>口语</a></li>
+          <li><a href="/writing" data-router>写作</a></li>
+          <li><a href="/dashboard" data-router>数据</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="root" class="container"></main>
+    <footer class="container">Made for CET-4/6 improvement · 无需死记硬背</footer>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // enable nav links without full reload
+      document.addEventListener('click', (e)=>{
+        const a = e.target.closest('a[data-router]');
+        if(a){
+          e.preventDefault();
+          history.pushState({}, '', a.getAttribute('href'));
+          window.dispatchEvent(new PopStateEvent('popstate'));
+        }
+      });
+    </script>
+  </body>
+</html>
